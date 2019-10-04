@@ -1,4 +1,27 @@
+# Dion's Final Project
+
+## Overview
+
+Platform belajar online learning
+
+## Features
+
+1. Bisa Membership
+2. Pembayaran via transfer lalu upload bukti transfer
+3. 
+
+## Challenges
+
+1. Waktu terbatas
+2. Ditambah tugas setiap hari
+3. Membuat video player
+4. membuat materi yang interaktif
+5. Menyimpan Video di SQL
+6. 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
@@ -66,3 +89,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
