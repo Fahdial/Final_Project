@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './stylesearch.css'
+
 
 class Register extends Component {
 
@@ -21,8 +21,7 @@ class Register extends Component {
         if(data_username && data_email && data_password){
 
                   // Check apa username sudah terpakai
-        axios.get(
-            'http://localhost:2000/users',
+        axios.get('http://localhost:2000/users',
             {
                 params: {
                     username: data_username
@@ -44,8 +43,7 @@ class Register extends Component {
 
             } else {
                 // Check apakah email sudah digunakan
-                axios.get(
-                    'http://localhost:2000/users',
+                axios.get('http://localhost:2000/users',
                     {
                         params: {
                             email: data_email
@@ -79,21 +77,15 @@ class Register extends Component {
                             // spinner jadi button, muncul pesan 'success'
                             this.setState({loading: false, success:'Sign up berhasil'})
                         
-                            // Menghapus pesan error setelah 3 detik
+                            // Menghapus pesan su setelah 3 detik
                             setTimeout(
-                                () => { this.setState({error: ''})},
+                                () => { this.setState({success: ''})},
                                 3000
-                            )
-                            
-                        
+                            )  
                         })
-
                     }
-
-                } )
-
+                })
             }
-
         } )
             
         } else{
@@ -104,31 +96,20 @@ class Register extends Component {
             setTimeout(
                 () => { this.setState({error: ''})},
                 3000
-            )
-            
-            
-        }
+            )}
     }
-
     loadingButton = () => {
         if(this.state.loading){
             return (
                 <div className='spinner-grow' role='status'>
                     <span className='sr-only'></span>
                 </div>
-            )
-
-        }
-
-        return (
-            <button 
+            )}
+            return (
+                <button 
                 className='searchcolor1'
-                onClick={this.onRegisterClick}
-            >Sign up</button>
-        )
-
-    }
-
+                onClick={this.onRegisterClick}>Sign up</button>
+            )}
     notification = () => {
         if(this.state.error){
             // notif error, danger
@@ -137,18 +118,16 @@ class Register extends Component {
                     {this.state.error}
                 </div>
             )
-
         } else if(this.state.success){
             // notif success, success
             return (
                 <div className='alert alert-success mt-4'>
                     {this.state.success}
                 </div>
-            )
-
-        } else {
-            return null
-        }
+                )
+            } else {
+                return null
+            }
     }
 
     render() {
@@ -183,9 +162,7 @@ class Register extends Component {
                             {this.loadingButton()}
                         </div>
                         <p className="text-center mt-3">Sudah memiliki akun?<a href="/login"> Masuk Sekarang</a></p>
-
                         {this.notification()}
-                        
                     </div>
                 </div>
             </div>

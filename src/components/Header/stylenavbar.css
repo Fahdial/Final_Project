@@ -1,0 +1,126 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+.navv{
+    display: flex;
+    /* position: fixed; */
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    min-width: 100vw;
+    background-color: rgb(49, 47, 47);
+}
+
+.logoo{
+    margin-top: 10px;
+    margin-left: 6rem;
+    flex-grow:1.4;
+    /* font-size: 20px; */
+}
+
+.textlogo{
+    color:turquoise;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+}
+
+.textlogo:hover{
+    color: rgb(55, 194, 180);
+    text-decoration: none
+}
+
+.navv-links{
+    margin-right: 4rem;
+    display: flex;
+    flex-grow: 0.6;
+    justify-content: space-around;
+    width: 100px;
+    color:turquoise;
+
+}
+
+.navv-links li{
+    text-align: right;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.navv-links a{
+    color:turquoise;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    /* font-weight: bold; */
+    font-size: 14px;
+    /* text-align: right; */
+}
+
+.navv-links span{
+    color:turquoise;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    font-size: 14px;
+}
+
+.navv-links a:hover{
+    color: rgb(55, 194, 180);
+    text-decoration: none
+}
+
+.masukkls{
+    color:turquoise;
+    /* text-decoration: none; */
+    /* letter-spacing: 1.5px; */
+    /* font-weight: bold; */
+    font-size: 15px;
+    text-align: right;
+}
+
+
+/* DROP DOWN */
+
+li.dropdown {
+    display: inline-block;
+    text-align: left;
+  }
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:rgb(49, 47, 47);
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /* text-align: center; */
+    border-radius: 2px;
+  }
+  
+.dropdown-content a {
+    color: turquoise;   
+    padding: 13px 10px;
+    text-decoration: none;
+    display: block;
+    transition-duration: 0.1s;
+    text-align: center;
+  }
+  
+.dropdown-content a:hover {background-color: #f1f1f1;}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.dropdown:hover .dropbtn {
+    color: rgb(55, 194, 180);
+    text-decoration: none
+  }
+  
+/* @media screen and (max-widht:1024px){
+    .nav-links{
+        width:60%; 
+    }
+} */

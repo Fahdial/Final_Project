@@ -1,0 +1,30 @@
+.judul{
+    margin: 80px;
+    text-align: center;
+    align-items: center;
+    /* vertical-align: middle; */
+}
+
+.judull{
+    /* text-align: left; */
+    /* vertical-align: middle; */
+    border-top: solid 1px
+}
+
+.judull td {
+    vertical-align: middle !important;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+
+.judull h2 {
+    margin-bottom: 0rem !important;
+}
+
+.judull p {
+    margin-bottom: 0px ;
+    text-align: justify
+}

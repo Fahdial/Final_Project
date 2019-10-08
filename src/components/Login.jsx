@@ -12,7 +12,7 @@ class Login extends Component {
       validateForm() {
         return this.state.username.length > 0 && this.state.password.length > 0;
       }
-      handleChange = event => {
+      handleChange = event => { 
         this.setState({ [event.target.id]: event.target.value });
       };
     

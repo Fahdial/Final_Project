@@ -1,21 +1,20 @@
 import {combineReducers} from 'redux'
 
-
 const init = {
     id: '',
     username: ''
 }
 
 const AuthReducer = (state = init, action) => {
-    switch (action.type) {
+    switch (action.type) 
+        {
         case 'LOGIN_SUCCESS':
             // Akan menyalin property di state untuk kemudian di ubah 'id' dan 'username'
             return {
                 ...state,
-                id: action.payload.id, 
-                username: action.payload.username 
+                id: action.payload.id,
+                username: action.payload.username
             }
-
             // Hilangkan id dan username
         case 'LOGOUT_SUCCESS':
             return {
@@ -23,7 +22,6 @@ const AuthReducer = (state = init, action) => {
                     id: '', 
                     username: '' 
                 }
-
         default:
             return state
     }
@@ -36,12 +34,6 @@ const reducers = combineReducers(
 )
 
 export default reducers
-
-
-
-
-
-
 
 // Pertama kali app running, reducer akan menjalankan kode yang ada di 'default'
 // pada default kita akan return 'state' yang berisi object 'init' sebagai data awal

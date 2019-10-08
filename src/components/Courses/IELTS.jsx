@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../Courses/stylecourses.css'
 import '../Header/stylenavbar.css'
 
-export class TOEFL extends Component {
+export class IELTS extends Component {
     render() {
         return (
             <div>
@@ -71,4 +71,4 @@ export class TOEFL extends Component {
     }
 }
 
-export default TOEFL
+export default IELTS
