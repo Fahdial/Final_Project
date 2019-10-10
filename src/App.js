@@ -11,6 +11,8 @@ import IELTS from './components/Courses/IELTS'
 import GMAT from './components/Courses/GMAT'
 import Membership from './components/Membership/Membership'
 
+import AdminDashboard from './components/Admin Dashboard/dashboard'
+
 // Action Creator
 const keepLogin = (objUser) => {
     return { // Action
