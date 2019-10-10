@@ -4,4 +4,5 @@ var adminController = require('./adminController')
 module.exports = {
     userController,
     adminController
+
 }
