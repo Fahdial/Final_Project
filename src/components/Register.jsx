@@ -21,7 +21,7 @@ class Register extends Component {
         if(data_username && data_email && data_password){
 
                   // Check apa username sudah terpakai
-        axios.get('http://localhost:2000/users',
+        axios.get('http://localhost:2000/user',
             {
                 params: {
                     username: data_username
@@ -43,7 +43,7 @@ class Register extends Component {
 
             } else {
                 // Check apakah email sudah digunakan
-                axios.get('http://localhost:2000/users',
+                axios.get('http://localhost:2000/user',
                     {
                         params: {
                             email: data_email
@@ -66,7 +66,7 @@ class Register extends Component {
                     } else {
                         // POST DATA BARU
                         axios.post(
-                            'http://localhost:2000/users',
+                            'http://localhost:2000/user',
                             {
                                 username: data_username,
                                 email: data_email,

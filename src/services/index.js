@@ -13,7 +13,7 @@ const Get = (path) => {
     })
 }
 
-const getDataUsers = Get('users')
+const getDataUsers = Get('user')
 
 const API = {
     getDataUsers,

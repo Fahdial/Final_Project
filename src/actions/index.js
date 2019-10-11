@@ -9,7 +9,7 @@ import swal from 'sweetalert2'
 export const onLoginUser = (USERNAME, PASSWORD) => {
 
     return dispatch => {
-        axios.get(`http://localhost:2000/users`, {
+        axios.get(`http://localhost:2000/user`, {
             params: {
               username: USERNAME
             }
@@ -17,7 +17,7 @@ export const onLoginUser = (USERNAME, PASSWORD) => {
               if (!res.data.length) {
                 swal.fire("Error", "User not found", "error");
               } else {
-                axios.get(`http://localhost:2000/users`, {
+                axios.get(`http://localhost:2000/user`, {
                     params: {
                       username: USERNAME,
                       password: PASSWORD
