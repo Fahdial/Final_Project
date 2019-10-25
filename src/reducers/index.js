@@ -1,31 +1,23 @@
 import {combineReducers} from 'redux'
 
-const init = {
-    id: '',
-    username: ''
+const initial = {
+    username: '',
+    email: ''
 }
 
-const AuthReducer = (state = init, action) => {
-    switch (action.type) 
-        {
+const AuthReducer = (state = initial, action) => {
+    switch (action.type) {
+        case 'KEEP_LOGIN':
+            return {...state, username: action.payload.username, email: action.payload.email}
         case 'LOGIN_SUCCESS':
-            // Akan menyalin property di state untuk kemudian di ubah 'id' dan 'username'
-            return {
-                ...state,
-                id: action.payload.id,
-                username: action.payload.username
-            }
-            // Hilangkan id dan username
+            return {...state, username: action.payload.username, email: action.payload.email}
         case 'LOGOUT_SUCCESS':
-            return {
-                ...state,
-                    id: '', 
-                    username: '' 
-                }
+            return {...state, username: '', email: ''}
         default:
             return state
     }
 }
+
 
 const reducers = combineReducers(
     {

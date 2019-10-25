@@ -1,173 +1,127 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, {useState} from 'react'
+import API from '../services'
+import Swal from 'sweetalert2'
 
 
-class Register extends Component {
+const Register = () => {
 
-    state = {
+    const [ state, setState ] = useState({
+        username: '',
+        email: '',
+        password: '',
+        // repPassword: ''
+    })
+
+    const [ state2, setState2 ] = useState({
         loading: false,
         error: '',
-        success: ''
-    }
+        success: '',
+        notification: ''
+    })
 
-    onRegisterClick = () => {
-        this.setState({loading: true})
-
-        // Ambil semua data dari text input
-        let data_username = this.username.value
-        let data_email = this.email.value
-        let data_password = this.password.value
-
-        if(data_username && data_email && data_password){
-
-                  // Check apa username sudah terpakai
-        axios.get('http://localhost:2000/user',
-            {
-                params: {
-                    username: data_username
+    const onRegisterClick = () => {
+        setState2({...state2, loading: true})
+        const {username, email, password} = state
+        const data = {
+            username: username,
+            email: email,
+            password: password,
+            // repPassword: repPassword
+        }
+        if (username && email && password) {
+            API.userRegister(data)
+            .then(res => {
+                const {status, message} = res.data
+                if (status == 404) {
+                    Swal.fire({
+                        type: 'error',
+                        title: message
+                    })
+                } else {
+                    Swal.fire({
+                        type: 'success',
+                        title: message,
+                    })
                 }
-            }
-        ).then( (res) => {
-
-            // Jika data di temukan berdasarkan username
-            if(res.data.length > 0){
-
-                // spinner akan jadi button, akan muncul pesan 'error
-                this.setState({loading: false, error:'Username sudah digunakan'})
-
-                // Menghapus pesan error setelah 3 detik
-                setTimeout(
-                    () => { this.setState({error: ''}) },
-                    3000
-                )
-
-            } else {
-                // Check apakah email sudah digunakan
-                axios.get('http://localhost:2000/user',
-                    {
-                        params: {
-                            email: data_email
-                        }
-                    }
-                ).then( (res) => {
-
-                    // Jika data ditemukan berdasarkan email
-                    if(res.data.length > 0){
-                        
-                        // spinner jadi button, muncul pesan 'error'
-                        this.setState({loading: false, error:'Email sudah digunakan'})
-                    
-                        // Menghapus pesan error setelah 3 detik
-                        setTimeout(
-                            () => { this.setState({error: ''})},
-                            3000
-                        )
-                    
-                    } else {
-                        // POST DATA BARU
-                        axios.post(
-                            'http://localhost:2000/user',
-                            {
-                                username: data_username,
-                                email: data_email,
-                                password: data_password
-                            }
-                        ).then(() => {
-                            
-                            // spinner jadi button, muncul pesan 'success'
-                            this.setState({loading: false, success:'Sign up berhasil'})
-                        
-                            // Menghapus pesan su setelah 3 detik
-                            setTimeout(
-                                () => { this.setState({success: ''})},
-                                3000
-                            )  
-                        })
-                    }
-                })
-            }
-        } )
-            
-        } else{
-            // spinner jadi button, muncul pesan 'success'
-            this.setState({loading: false, error:'Silahkan isi data terlebih dahulu'})
-                        
-            // Menghapus pesan error setelah 3 detik
-            setTimeout(
-                () => { this.setState({error: ''})},
-                3000
-            )}
+                setTimeout(() => {
+                    setState2({...state2, loading: false })
+                }, 100);
+            })
+        } else {
+            setTimeout(() => {
+                setState2({...state2, loading: false, error: 'Please fill out the form first'})  
+            }, 100);
+            setTimeout(() => {
+                setState2({...state2, error: ''})
+            }, 5000);
+        }   
     }
-    loadingButton = () => {
-        if(this.state.loading){
+       const loadingButton = () => {
+        if(state2.loading){
             return (
+                <div className= 'text-center'>
                 <div className='spinner-grow' role='status'>
                     <span className='sr-only'></span>
+                </div>
                 </div>
             )}
             return (
                 <button 
                 className='searchcolor1'
-                onClick={this.onRegisterClick}>Sign up</button>
+                onClick={onRegisterClick}>Sign up</button>
             )}
-    notification = () => {
-        if(this.state.error){
-            // notif error, danger
-            return (
-                <div className='alert alert-danger mt-4'>
-                    {this.state.error}
-                </div>
-            )
-        } else if(this.state.success){
-            // notif success, success
-            return (
-                <div className='alert alert-success mt-4'>
-                    {this.state.success}
-                </div>
-                )
-            } else {
-                return null
+
+        const notification = () => {
+                if(state2.error){
+                    // notif error, danger
+                    return (
+                        <div className='alert alert-danger mt-4 text-center'>
+                            {state2.error}
+                        </div>
+                    )
+                    } else {
+                        return null
+                    }
             }
-    }
 
-    render() {
-        return (
-            <div>
-                <div className='col-sm-4 mx-auto card mt-70'>
-                    <div className='card-body'>
+    return (
+        <div>
+        <div className='col-sm-4 mx-auto card mt-70'>
+            <div className='card-body'>
 
-                        <div className="card-title border-bottom border-secondary">
-                            <h1>Sign up</h1>
-                        </div>
-                        
-                        <form className='form-group'>
-                            <div className="card-title ">
-                                <h4>Username</h4>
-                            </div>
-                            <input ref={(input) => {this.username = input}} type='text' className='form-control'/>
-
-                            <div className="card-title mt-3 ">
-                                <h4>Email</h4>
-                            </div>
-                            <input ref={(input) => {this.email = input}} type='text' className='form-control'/>
-
-                            <div className="card-title mt-3">
-                                <h4>Password</h4>
-                            </div>
-                            <input ref={(input) => {this.password = input}} type='password' className='form-control'/>
-
-                        </form>
-                        
-                        <div className='d-flex justify-content-center'>
-                            {this.loadingButton()}
-                        </div>
-                        <p className="text-center mt-3">Sudah memiliki akun?<a href="/login"> Masuk Sekarang</a></p>
-                        {this.notification()}
-                    </div>
+                <div className="card-title border-bottom border-secondary">
+                    <h1>Sign up</h1>
                 </div>
+                
+                <form className='form-group'>
+                    <div className="card-title ">
+                        <h4>Username</h4>
+                    </div>
+                    <input value= {state.username} onChange ={ e => setState({...state, username: e.target.value})} type='text' className='form-control'/>
+
+                    <div className="card-title mt-3 ">
+                        <h4>Email</h4>
+                    </div>
+                    <input  value= {state.email} onChange ={ e => setState({...state, email: e.target.value})} type='text' className='form-control'/>
+
+                    <div className="card-title mt-3">
+                        <h4>Password</h4>
+                    </div>
+                    <input value= {state.password} onChange ={ e => setState({...state, password: e.target.value})} type='password' className='form-control'/>
+
+                    {/* <div className="card-title mt-3">
+                        <h4>Repeat Password</h4>
+                    </div>
+                    <input value= {state.repPassword} onChange ={ e => setState({...state, repPassword: e.target.value})} type='password' className='form-control'/> */}
+                </form>
+                    {loadingButton()}
+                    {notification()}
+                <p className="text-center mt-3">Sudah memiliki akun?<a href="/login"> Masuk Sekarang</a></p>
+                
             </div>
-        )
-    }
+        </div>
+    </div>
+    )
 }
 
 export default Register

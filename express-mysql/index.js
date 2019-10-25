@@ -6,13 +6,13 @@ const port = 2000
 const { userRouter, adminRouter } = require('./2.router')
 
 app.use(bodyParser.json())
+app.use(cors())
 // app.use('/subscription', express.static('subscription')) 
 // app.use('/profile', express.static('profile'))
 // app.use('/thumbnail', express.static('thumbnail'))
-app.use(cors())
 
-app.use('/user', userRouter)
-app.use('/admin', adminRouter)
+app.use('/auth', userRouter)
+// app.use('/admin', adminRouter)
 
 app.get('/', (req,res) => {
     res.send('<h1>Welcome to API</h1>')

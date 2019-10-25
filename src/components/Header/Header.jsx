@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {onLogoutUser} from '../../actions/index'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {onLogoutUser} from '../../actions/userAction'
 
 import '../Header/stylenavbar.css'
 
+const Header = () =>{
 
-class Header extends Component {
+    const dispatch = useDispatch()
+    const username = useSelector(state => state.auth.username)
 
-    render() {
         // jika belum ada yg login
-        if(!this.props.user_name){
+        if(!username){
         return (
             <div>
             <nav className = "navv">
@@ -74,12 +75,12 @@ class Header extends Component {
                         </li>
 
                         <li className="dropdown">
-                            <a href className="dropbtn">{this.props.user_name}</a>
+                            <a href className="dropbtn">{username}</a>
                                 <i className="fa"> &#xf107;</i>
 
                             <div divider className="dropdown-content">
                                 <a href="/" >ACCOUNT</a>
-                                <a href="/" onClick={this.props.onLogoutUser}>LOG OUT</a>
+                                <a href="/" onClick={dispatch(onLogoutUser)}>LOG OUT</a>
                             </div>
                         </li>
                 </ul>
@@ -87,51 +88,7 @@ class Header extends Component {
             </div>
         )
     }
-    }
 }
 
-// function untuk mengambil data di redux state
-const mapStateToProps = state => {
-    return {
-      user_name: state.auth.username
-    }
-  }
-
-
-
   
-  export default connect(mapStateToProps, {onLogoutUser})(Header)
-
-
-   /* constructor(props) {
-        super(props);
-    
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-          isOpen: false
-        };
-      }
-      toggle() {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
-
-
-
-      /* <UncontrolledDropdown>
-                    <DropdownToggle nav caret>
-                        <a href="#">Courses</a>
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                        <DropdownItem>
-                            <a href="#">TOEFL</a>
-                        </DropdownItem>
-                        <DropdownItem>
-                            <a href="#">IELTS</a>
-                        </DropdownItem>
-                        <DropdownItem>
-                            <a href="#">GMAT</a>
-                        </DropdownItem>
-                    </DropdownMenu>
-                    </UncontrolledDropdown> */
+  export default Header

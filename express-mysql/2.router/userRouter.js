@@ -1,5 +1,6 @@
 const router = require('express').Router()
 var multer = require('multer')
+// const {userController} = require('../1.controller')
 
 let multerStorageConfig = multer.diskStorage({
     destination : (req, file, cb) => {
@@ -20,7 +21,7 @@ let filterConfig = (req, file, cb) => {
     }
 }
 
-const {userLogin, register} = require ('../1.controller').userController
+const {userLogin, userRegister, verify} = require ('../1.controller').userController
 
 let upload = multer({
     storage: multerStorageConfig,
@@ -29,7 +30,7 @@ let upload = multer({
 
 
 router.get('/userlogin', userLogin)
-router.post('/register', register)
-router.get('/verifyemail', verifyEmail)
+router.post('/userRegister', userRegister)
+router.get('/verify', verify)
 
 module.exports = router

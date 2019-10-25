@@ -20,9 +20,6 @@ render(){
                     </div>  
                 </div>
             </div>
-            <div className="judulhome2">
-                <h1>Jamban</h1>
-            </div>
         </div>
         {/* page 2 */}
         <div className="judul">

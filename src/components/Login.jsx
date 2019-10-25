@@ -1,91 +1,74 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import { userlogin,keepLogin } from '../actions/userAction'
 // import Swal from 'sweetalert2'
-import {onLoginUser} from '../actions/index'
+import {onLoginUser} from '../actions/userAction'
 
-class Login extends Component {
-    state = {
-        username: "",
-        password: ""
-      };
-      validateForm() {
-        return this.state.username.length > 0 && this.state.password.length > 0;
-      }
-      handleChange = event => { 
-        this.setState({ [event.target.id]: event.target.value });
-      };
-    
-      onLoginClick = () => {
-        if(this.validateForm()){
-        let username = this.state.username;
-        let password = this.state.password;
-        this.props.onLoginUser(username, password);
-      }}
-    
-      handleSubmit = event => {
-        event.preventDefault();
-      }
+const Login = () => {
+    const dispatch = useDispatch()
+    const user = useSelector( state => state.auth )
 
-    render() {
-        // jika user belum login
-        if(!this.props.user_name){
-            return (
-                <div>
+    const [ data, setData ] = useState({
+        email: '',
+        password: ''
+    })
+
+    const onLoginClick = () => {
+        dispatch(onLoginUser(data.email, data.password))
+        // setShouldRender(true)
+    }
+
+    return (
+            <div>
+                {
+                    // (user.username === ''? ini agat lebih sepesifik dan tidak bisa masuk ke login lagi kalau ada username )
+                    user.username === '' ?
                     <div className='col-sm-4 mx-auto card mt-70'>
-                        <div className='card-body'>
-    
-                            <div className="card-title border-bottom border-secondary">
-                                <h1>Sign in</h1>
+                    <div className='card-body'>
+
+                        <div className="card-title border-bottom border-secondary">
+                            <h1>Sign in</h1>
+                        </div>
+                        
+                        <form className='form-group' onSubmit={onLoginClick}>
+                            <div className="card-title ">
+                                <h4>Email</h4>
+                            </div>
+                            <input 
+                                className="form-control"
+                                id="email"
+                                value={data.email}
+                                onChange={e => {setData({...data, email: e.target.value})}}
+                                type="text"
+                                autoFocus
+                                required
+                            />
+                            <div className="card-title mt-3">
+                                <h4>Password</h4>
                             </div>
                             
-                            <form className='form-group' onSubmit={this.handleSubmit}>
-                                <div className="card-title ">
-                                    <h4>Username</h4>
-                                </div>
-                                <input 
-                                    className="form-control"
-                                    id="username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    autoFocus
-                                    required
-                                />
-                                <div className="card-title mt-3">
-                                    <h4>Password</h4>
-                                </div>
-                                
-                                <input 
-                                className="form-control"
-                                id="password"
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                                type="password"
-                                required/>
-                            </form>
-    
-                            <button 
-                                className="searchcolor1"
-                                onClick={this.onLoginClick}
-                            >Sign in</button>
-                            <p className="text-center mt-3">Belum memiliki akun?<a href="/register"> Daftar Sekarang</a></p>
-                        </div>
+                            <input 
+                            className="form-control"
+                            id="password"
+                            value={data.password}
+                            onChange={e => {setData({...data, password: e.target.value})}}
+                            type="password"
+                            required/>
+                        </form>
+
+                        <button 
+                            className="searchcolor1"
+                            onClick={onLoginClick}
+                        >Sign in</button>
+                        <p className="text-center mt-3">Belum memiliki akun?<a href="/register"> Daftar Sekarang</a></p>
                     </div>
                 </div>
-            )
-        } else {
-            // jika sudah login, akan di arahkan ke halaman 'home'
-            return <Redirect to='/'/>
-        }
-    }
+                :
+                <Redirect to='/'/>
+                }
+            </div>
+    )
 }
-
 // function yg akan mengambil data di redux state
-const mapStateToProps = state => {
-    return {
-        user_name :state.auth.username
-    }
-}
-
-export default connect(mapStateToProps,{onLoginUser})(Login)
+export default Login

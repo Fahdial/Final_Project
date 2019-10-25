@@ -1,9 +1,14 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Route, BrowserRouter} from 'react-router-dom'
-import {connect} from  'react-redux'    
+import { useDispatch, useSelector } from 'react-redux'
+import Cookies from 'universal-cookie'
+import Swal from 'sweetalert2'
+
 
 import Home from './components/Home/Home'
 import Header from './components/Header/Header'
+import {keepLogin} from './actions/userAction'
+
 import Register from './components/Register'
 import Login from './components/Login'
 import TOEFL from './components/Courses/TOEFL'
@@ -14,26 +19,21 @@ import Membership from './components/Membership/Membership'
 import AdminDashboard from './components/Admin Dashboard/dashboard'
 
 // Action Creator
-const keepLogin = (objUser) => {
-    return { // Action
-        type: 'LOGIN_SUCCESS',payload: {id: objUser.id, username: objUser.username}
-    }
-}
-class App extends Component {
-    state = {
-        check: false
-    }
+// cookies ini harus dipaling bawah semua import, diatas const app
+const cookies = new Cookies()
 
-    componentDidMount() {
-        // check local storage
-        let userStorage = JSON.parse(localStorage.getItem('userData'))
-        if(userStorage){
-            this.props.keepLogin(userStorage) // kirim ke redux
-        }   this.setState({check: true})
-    }
-
-    render() {
-        if(this.state.check){
+const App = () => {
+    
+    const dispatch = useDispatch()
+   
+    // use efect selalu bikin anonimus function seperti dibawah
+    useEffect (() => {
+        let cookie = cookies.get('user')
+        if (cookie){
+            dispatch(keepLogin(cookie.username, cookie.email))
+        }
+    },[])
+    
         return (
                 <BrowserRouter>
                     <Header/> 
@@ -46,10 +46,8 @@ class App extends Component {
                     <Route path='/membership' component={Membership}/>
                 </BrowserRouter>
             )
-        }else {
-            return <div><h1 className='text-center'>Loading</h1></div>
         }
-    }
-}
+    
 
-export default connect(null,{keepLogin})(App)
+
+export default App
