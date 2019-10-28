@@ -30,6 +30,7 @@ const Post = (path, data) => {
 
 // GET
 const userLogin = (input) => Get('auth/userlogin', input)
+const getdatalink = (input) => Get('auth/getdatalink', input)
 
 // POST
 const userRegister = (data) => Post('auth/userRegister', data)
@@ -37,7 +38,8 @@ const userRegister = (data) => Post('auth/userRegister', data)
 // API
 const API = {
     userRegister,
-    userLogin
+    userLogin,
+    getdatalink
 }
 
 export default API;

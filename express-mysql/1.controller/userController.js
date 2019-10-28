@@ -92,6 +92,12 @@ module.exports = {
                 if (err) throw err
                 res.send('<h1>Your account has been verified! Please Login here </h1>')
             })
+        },
+        
+    getDataLink: (req,res) => {
+            let sql = `select * from movies where link = '${req.params.link}'`
+            db.query(sql, (err, result)=>{
+                if (err) throw err
+            })
         }
 }
-

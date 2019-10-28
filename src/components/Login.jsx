@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import { userlogin,keepLogin } from '../actions/userAction'
 // import Swal from 'sweetalert2'
 import {onLoginUser} from '../actions/userAction'
 
@@ -70,5 +69,5 @@ const Login = () => {
             </div>
     )
 }
-// function yg akan mengambil data di redux state
+
 export default Login
