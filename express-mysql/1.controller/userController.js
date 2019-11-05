@@ -85,6 +85,7 @@ module.exports = {
             })
         
         },
+
         // Nyobain verify sendiri
     verify: (req,res) => {
             let sql = `update users set isVerified = 1 where username = '${req.query.username}' and email = '${req.query.email}'`
@@ -94,10 +95,15 @@ module.exports = {
             })
         },
         
-    getDataLink: (req,res) => {
-            let sql = `select * from movies where link = '${req.params.link}'`
+    getAboutLink: (req,res) => {
+            let sql = `select link, thumbnails from movies`
             db.query(sql, (err, result)=>{
-                if (err) throw err
+                try {
+                    if (err) throw err
+                    res.send(result[0])
+                } catch (error) {
+                    console.log(error)
+                }
             })
         }
 }

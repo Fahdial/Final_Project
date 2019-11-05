@@ -13,6 +13,8 @@
     min-height: 10vh;
     min-width: 100vw;
     background-color: rgb(49, 47, 47);
+    color: turquoise;
+    
 }
 
 .logoo{
@@ -26,7 +28,6 @@
     color:turquoise;
     text-transform: uppercase;
     letter-spacing: 4px;
-
 }
 
 .textlogo:hover{
@@ -118,7 +119,50 @@ li.dropdown {
     color: rgb(55, 194, 180);
     text-decoration: none
   }
-  
+
+
+  /* BURGER */
+#sidebarr {
+    position: fixed;
+    width:300px;
+    height:100%;
+    background: rgb(49, 47, 47);
+    left: 0px;
+    transition: all 100ms linear;
+}
+
+#sidebarr.active {
+    left: -300px;
+}
+#sidebarr ul li{
+    color: turquoise;
+    text-align: center;
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3)
+}
+
+#sidebarr .toggle-btn{
+    position:absolute;
+    left:330px;
+    top:20px
+}
+
+#sidebarr .toggle-btn span{
+    display:block;
+    width: 25px;
+    height:3px;
+    background:turquoise;
+    margin: 5px 0px;
+}
+
+
+
+ 
+
+
+
+
 /* @media screen and (max-widht:1024px){
     .nav-links{
         width:60%; 

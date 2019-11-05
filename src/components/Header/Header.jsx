@@ -1,14 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {onLogoutUser} from '../../actions/userAction'
+import { Route, Link } from 'react-router-dom'
+
 
 import '../Header/stylenavbar.css'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 const Header = () =>{
 
     const dispatch = useDispatch()
     const username = useSelector(state => state.auth.username)
 
+    console.log(cookies.get('user'));
+    
         // jika belum ada yg login
         if(!username){
         return (
@@ -16,27 +23,27 @@ const Header = () =>{
             <nav className = "navv">
                 <div className="logoo">
                     <h3>
-                        <a className="textlogo" href="/">prepanation</a>
+                        <Link className="textlogo" to="/">prepanation</Link>
                     </h3>
                 </div>
                 <ul className="navv-links">
                         <li>
-                            <a href="/membership">Membership</a>
+                            <Link to="/membership">Membership</Link>
                         </li>
                         <li className="dropdown">
                             <span className="dropbtn">Courses</span>
                                 <i className="fa"> &#xf107;</i>
                             <div className="dropdown-content">
-                                <a href="/toefl">TOEFL</a>
-                                <a href="/ielts">IELTS</a>
-                                <a href="/gmat">GMAT</a>
+                                <Link to="/toefl">TOEFL</Link>
+                                <Link to="/ielts">IELTS</Link>
+                                <Link to="/gmat">GMAT</Link>
                             </div>
                         </li>
                         <li>
-                            <a href="/register">Sign up</a>
+                            <Link to="/register">Sign up</Link>
                         </li>
                         <li>
-                            <a href="/login">Sign in</a>
+                            <Link to="/login">Sign in</Link>
                         </li>
                 </ul>
             </nav>
@@ -49,7 +56,7 @@ const Header = () =>{
             <nav className = "navv">
                 <div className="logoo">
                     <h3>
-                        <a className="textlogo" href="/">prepanation</a>
+                        <Link className="textlogo" to="/">prepanation</Link>
                     </h3>
                 </div>
                 <ul className="navv-links">
@@ -58,9 +65,9 @@ const Header = () =>{
                             <span className="dropbtn">My Courses</span>
                                 <i className="fa"> &#xf107;</i>
                             <div className="dropdown-content">
-                                <a href="/toefl">TOEFL</a>
-                                <a href="/">IELTS</a>
-                                <a href="/">GMAT</a>
+                                <Link to="/toefl">TOEFL</Link>
+                                <Link to="/">IELTS</Link>
+                                <Link to="/">GMAT</Link>
                             </div>
                         </li>
 
@@ -68,19 +75,19 @@ const Header = () =>{
                             <span className="dropbtn">Membership</span>
                                 <i className="fa"> &#xf107;</i>
                             <div className="dropdown-content">
-                                <a href="/">Buy Membership</a>
-                                <a href="/">Payment Confirmation</a>
-                                <a href="/">Account Activation</a>
+                                <Link to="/">Buy Membership</Link>
+                                <Link to="/">Payment Confirmation</Link>
+                                <Link to="/">Account Activation</Link>
                             </div>
                         </li>
 
                         <li className="dropdown">
-                            <a href className="dropbtn">{username}</a>
+                            <Link to className="dropbtn">{username}</Link>
                                 <i className="fa"> &#xf107;</i>
 
                             <div divider className="dropdown-content">
-                                <a href="/" >ACCOUNT</a>
-                                <a href="/" onClick={dispatch(onLogoutUser)}>LOG OUT</a>
+                                <Link to="/" >ACCOUNT</Link>
+                                <Link to="/" onClick={()=> dispatch(onLogoutUser())}>LOG OUT</Link>
                             </div>
                         </li>
                 </ul>

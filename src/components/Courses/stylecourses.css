@@ -5,10 +5,18 @@
     /* vertical-align: middle; */
 }
 
+.card{
+    width: 350px;
+}
 .judull{
     /* text-align: left; */
     /* vertical-align: middle; */
     border-top: solid 1px
+}
+
+.judulsummary {
+    margin: 80px;
+    align-items: left;
 }
 
 .judull td {
@@ -27,4 +35,15 @@
 .judull p {
     margin-bottom: 0px ;
     text-align: justify
+}
+
+.containerr{
+    margin-left: 300px;
+    padding: 0 20px 20px;
+    background:black
+}
+
+#videobar.active {
+    margin-left: -300px;
+    transition: all 100ms linear;
 }

@@ -69,6 +69,7 @@ export const keepLogin = (username, email) => {
 
 export const onLogoutUser = () => {
     return dispatch => {
+        // console.log('masuk ga');
         cookies.remove('user')
         dispatch ({
             type: type.LOGOUT_SUCCESS

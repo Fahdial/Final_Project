@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
+import { Route, Link } from 'react-router-dom'
+import Header from "./Header/Header"
 import API from '../services'
 import Swal from 'sweetalert2'
 
@@ -85,42 +87,46 @@ const Register = () => {
             }
 
     return (
-        <div>
-        <div className='col-sm-4 mx-auto card mt-70'>
-            <div className='card-body'>
 
-                <div className="card-title border-bottom border-secondary">
-                    <h1>Sign up</h1>
+        <Fragment>
+            <Header/>
+                <div>
+                <div className='col-sm-4 mx-auto card mt-70'>
+                    <div className='card-body'>
+
+                        <div className="card-title border-bottom border-secondary">
+                            <h1>Sign up</h1>
+                        </div>
+                        
+                        <form className='form-group'>
+                            <div className="card-title ">
+                                <h4>Username</h4>
+                            </div>
+                            <input value= {state.username} onChange ={ e => setState({...state, username: e.target.value})} type='text' className='form-control'/>
+
+                            <div className="card-title mt-3 ">
+                                <h4>Email</h4>
+                            </div>
+                            <input  value= {state.email} onChange ={ e => setState({...state, email: e.target.value})} type='text' className='form-control'/>
+
+                            <div className="card-title mt-3">
+                                <h4>Password</h4>
+                            </div>
+                            <input value= {state.password} onChange ={ e => setState({...state, password: e.target.value})} type='password' className='form-control'/>
+
+                            {/* <div className="card-title mt-3">
+                                <h4>Repeat Password</h4>
+                            </div>
+                            <input value= {state.repPassword} onChange ={ e => setState({...state, repPassword: e.target.value})} type='password' className='form-control'/> */}
+                        </form>
+                            {loadingButton()}
+                            {notification()}
+                        <p className="text-center mt-3">Sudah memiliki akun?<Link to="/login"> Masuk Sekarang</Link></p>
+                        
+                    </div>
                 </div>
-                
-                <form className='form-group'>
-                    <div className="card-title ">
-                        <h4>Username</h4>
-                    </div>
-                    <input value= {state.username} onChange ={ e => setState({...state, username: e.target.value})} type='text' className='form-control'/>
-
-                    <div className="card-title mt-3 ">
-                        <h4>Email</h4>
-                    </div>
-                    <input  value= {state.email} onChange ={ e => setState({...state, email: e.target.value})} type='text' className='form-control'/>
-
-                    <div className="card-title mt-3">
-                        <h4>Password</h4>
-                    </div>
-                    <input value= {state.password} onChange ={ e => setState({...state, password: e.target.value})} type='password' className='form-control'/>
-
-                    {/* <div className="card-title mt-3">
-                        <h4>Repeat Password</h4>
-                    </div>
-                    <input value= {state.repPassword} onChange ={ e => setState({...state, repPassword: e.target.value})} type='password' className='form-control'/> */}
-                </form>
-                    {loadingButton()}
-                    {notification()}
-                <p className="text-center mt-3">Sudah memiliki akun?<a href="/login"> Masuk Sekarang</a></p>
-                
             </div>
-        </div>
-    </div>
+    </Fragment>
     )
 }
 
