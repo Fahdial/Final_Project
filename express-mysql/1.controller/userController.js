@@ -96,7 +96,7 @@ module.exports = {
         },
         
     getAboutLink: (req,res) => {
-            let sql = `select link, thumbnails from movies`
+            let sql = `select link from about`
             db.query(sql, (err, result)=>{
                 try {
                     if (err) throw err
@@ -105,5 +105,22 @@ module.exports = {
                     console.log(error)
                 }
             })
-        }
+        },
+
+    getVideoData: (req, res) => {
+        var sql = `select title, episode, link, description from lesson where subject_id = '${req.query.subject_id}'`
+        console.log(req.query);
+        // `select * from toefl_writing where id = '${req.params.id}'`
+        db.query(sql, (err,result) => {
+            try {
+                if(err) throw err
+                res.send(result)
+                // console.log(result);
+            } catch (err){
+                console.log(err)
+            }
+        })
+    },
+
+
 }

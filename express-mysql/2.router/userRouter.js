@@ -21,7 +21,7 @@ let filterConfig = (req, file, cb) => {
     }
 }
 
-const {userLogin, userRegister, verify, getAboutLink} = require ('../1.controller').userController
+const {userLogin, userRegister, verify, getAboutLink, getVideoData} = require ('../1.controller').userController
 
 let upload = multer({
     storage: multerStorageConfig,
@@ -33,5 +33,6 @@ router.get('/userlogin', userLogin)
 router.post('/userRegister', userRegister)
 router.get('/verify', verify)
 router.get('/getaboutlink', getAboutLink)
+router.get('/video', getVideoData)
 
 module.exports = router

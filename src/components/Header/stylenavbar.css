@@ -156,7 +156,25 @@ li.dropdown {
     margin: 5px 0px;
 }
 
+.title-back{
+    /* min-height: 10vh; */
+    /* position: absolute; */
+    padding-bottom: 1.5rem !important;
+    padding-top: 1.5rem !important;
+    min-width: 100vw;
+    background-color: rgb(49, 47, 47);
+    color: turquoise;
+    
+    /* text-align: center; */
+}
 
+.title-back-font{
+    color: turquoise;
+    text-align: center;
+    margin-left: 300px
+    /* padding: 25px */
+
+}
 
  
 

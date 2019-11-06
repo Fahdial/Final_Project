@@ -29,7 +29,7 @@ const GMAT = () => {
                                     <td>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, facilis vero. Deserunt ipsa necessitatibus natus, voluptate quos itaque minus. Illum totam labore, necessitatibus repudiandae porro laudantium qui, accusamus velit perspiciatis perferendis quae quos saepe est, voluptates eligendi iusto deserunt nesciunt.</p>
                                         <br/>
-                                        <Link className="masukkls" to="/toeflwriting">Enter Writing Task ></Link>
+                                        <Link className="masukkls" to="/toefl_writing">Enter Writing Task ></Link>
                                     </td>
                                 </tr>
                                 <tr>

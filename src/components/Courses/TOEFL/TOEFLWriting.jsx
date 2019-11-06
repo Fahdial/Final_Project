@@ -67,7 +67,7 @@ const TOEFLWriting = () => {
                                                     <li>MLorem ipsum dolor sit amet consectetur</li>
                                                     <li>MLorem ipsum dolor sit amet consectetur</li>
                                                 </ul> 
-                                                <Link to="/toefl/toeflwriting/introduction" ><button className='searchcolor1'>Start This Course >></button> </Link>
+                                                <Link to="/toefl/toefl_writing/introduction" ><button className='searchcolor1'>Start This Course >></button> </Link>
                                                 
                                         </div>
                                     </div>

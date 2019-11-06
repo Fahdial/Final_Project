@@ -37,6 +37,8 @@
     text-align: justify
 }
 
+
+/* TOGGLE */
 .containerr{
     margin-left: 300px;
     padding: 0 20px 20px;
@@ -47,3 +49,31 @@
     margin-left: -300px;
     transition: all 100ms linear;
 }
+
+.deskripsii{
+    margin-left: 300px
+}
+
+#deskripsi.active {
+    margin-left: -300px;
+}
+
+#title.active {
+    margin-left: -50px
+}
+
+/* BUTTON */
+.nextcolor{
+    color:white;
+    background-color: rgb(55, 194, 180);
+    border: none;
+    width: 100px;
+    border-radius: 4px;
+    block-size: 50px;
+}
+.nextcolor:hover {
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.19),0 5px 5px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.2s;
+}
+
+

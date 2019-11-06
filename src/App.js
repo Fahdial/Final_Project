@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Route, BrowserRouter, Link} from 'react-router-dom'
+import {Route, BrowserRouter, Link, Switch, withRouter} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
@@ -48,22 +48,24 @@ const App = () => {
         // disini loading udh jadi true
         if(loading){
             return (
-                <BrowserRouter>
-                    <Route path='/' exact component={Home}/>
-                    <Route path='/register' component={Register}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path='/toefl' exact component={TOEFL}/>
-                    <Route path='/toefl/toeflsyllabus' exact component={TOEFLSyllabus}/>
-                    <Route path='/toefl/toeflwriting' exact component={TOEFLWriting}/>
-                    <Route path='/toefl/toeflwriting/introduction' exact component={TOEFLWritingLessons}/>
-                    <Route path='/toefl/toeflreading' component={TOEFLReading}/>
-                    <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
-                    <Route path='/toefl/toefllistening' component={TOEFLListening}/>
-                    <Route path='/ielts' component={IELTS}/>
-                    <Route path='/gmat' component={GMAT}/>
-                    <Route path='/membership' component={Membership}/>
-                    <Route path='/dashboard' component={dashboard} exact />
-                </BrowserRouter>
+                
+                    <Switch>
+                            <Route path='/' exact component={Home}/>
+                            <Route path='/register' component={Register}/>
+                            <Route path='/login' component={Login}/>
+                            <Route path='/toefl' exact component={TOEFL}/>
+                            <Route path='/toefl/toeflsyllabus' exact component={TOEFLSyllabus}/>
+                            <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                            <Route path='/toefl/toefl_writing/:id' exact component={TOEFLWritingLessons}/>
+                            <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                            <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                            <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                            <Route path='/ielts' component={IELTS}/>
+                            <Route path='/gmat' component={GMAT}/>
+                            <Route path='/membership' component={Membership}/>
+                            <Route path='/dashboard' component={dashboard} exact />
+                    </Switch>        
+                
             )
         // kalo false dia jadi 
         }else {
@@ -73,4 +75,4 @@ const App = () => {
         }   
         }
 
-export default App
+export default withRouter(App)

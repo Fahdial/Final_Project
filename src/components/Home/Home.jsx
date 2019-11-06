@@ -9,8 +9,7 @@ import '../Home/stylesearch.css'
 const Home = () => {
 
   const [ data, setData ] = useState({
-    link : '',
-    thumbnails: ''
+    link : ''
   })
 
   // const [ data, setData ] = useState()

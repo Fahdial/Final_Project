@@ -31,6 +31,7 @@ const Post = (path, data) => {
 // GET
 const userLogin = (input) => Get('auth/userlogin', input)
 const getAboutLink = () => Get('auth/getaboutlink')
+const getVideoData = (input) => Get('auth/video', input)
 
 // POST
 const userRegister = (data) => Post('auth/userRegister', data)
@@ -39,7 +40,8 @@ const userRegister = (data) => Post('auth/userRegister', data)
 const API = {
     userRegister,
     userLogin,
-    getAboutLink
+    getAboutLink,
+    getVideoData
 }
 
 export default API;
