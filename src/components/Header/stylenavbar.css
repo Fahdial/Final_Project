@@ -176,9 +176,33 @@ li.dropdown {
 
 }
 
- 
+/* dashboard */
+#sidebarrr {
+    position: fixed;
+    width:150px;
+    height:100%;
+    background: rgb(49, 47, 47);
+    left: 0px;
+    transition: all 100ms linear;
+    /* overflow:scroll */
+}
 
+#sidebarrr ul li{
+    color: turquoise;
+    text-align: center;
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
 
+.dashboardq{
+    margin-left: 150px
+}
+
+.textdetil{
+    overflow: scroll;
+    height: 95vh;
+}
 
 
 /* @media screen and (max-widht:1024px){

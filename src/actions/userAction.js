@@ -7,7 +7,8 @@ const cookies = new Cookies()
 const type = {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     KEEP_LOGIN: 'KEEP_LOGIN',
-    LOGOUT_SUCCESS: 'LOGOUT_SUCCESS'
+    LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+    CHANGE_SUCCESS: 'CHANGE_SUCCESS'
 }
 
 export const onLoginUser = (email, password) => {
@@ -36,17 +37,24 @@ export const onLoginUser = (email, password) => {
                     title: message
                 })
             }else {
-                let { username } = res.result
+                let { username, GMAT, IELTS, TOEFL, id, role, isVerified} = res.result
+                console.log(res);
                 Swal.fire({
                     type: 'success',
                     title: 'Login Success!'
                 })
-                cookies.set('user', { username, email }, { path: '/' })
+                cookies.set('user', { username, email, GMAT, IELTS, TOEFL, id, role, isVerified }, { path: '/' })
                 dispatch({
                     type: type.LOGIN_SUCCESS,
                     payload: {
                         username,
-                        email
+                        email, 
+                        GMAT, 
+                        IELTS, 
+                        TOEFL, 
+                        id, 
+                        role, 
+                        isVerified
                     }
                 })
             }
@@ -55,13 +63,13 @@ export const onLoginUser = (email, password) => {
     }
 }
 
-export const keepLogin = (username, email) => {
+export const keepLogin = (username, email, id, role, isVerified,GMAT,IELTS,TOEFL) => {
     return (
         {
             type: type.KEEP_LOGIN,
             payload: {
                 username, 
-                email
+                email, id, role, isVerified,GMAT,IELTS,TOEFL
             }
         }
     )
@@ -75,4 +83,31 @@ export const onLogoutUser = () => {
             type: type.LOGOUT_SUCCESS
         })
     }
+}
+
+export const changeState = (userid) =>{
+    console.log(userid);
+    
+    return dispatch => {
+        API.getChangeState({userid})
+        .then(res =>{
+            console.log(res);
+            let { username, email,  GMAT, IELTS, TOEFL, id, role, isVerified} = res   
+            cookies.set('user', { username, email, GMAT, IELTS, TOEFL, id, role, isVerified }, { path: '/' })
+            dispatch({
+                type: type.LOGIN_SUCCESS,
+                payload: {
+                    username,
+                    email, 
+                    GMAT, 
+                    IELTS, 
+                    TOEFL, 
+                    id, 
+                    role, 
+                    isVerified
+                }
+            })
+        })
+        }
+    
 }

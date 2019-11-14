@@ -17,7 +17,7 @@ const TOEFLWriting = () => {
                             <div className='col-8'>
                                 <h3>Writing Course Summary</h3>
                                     <div>
-                                    <ReactPlayer url='https://www.youtube.com/watch?v=m2DolwMqErc' width='100%' height="500px" playing controls/>
+                                    {/* <ReactPlayer url='https://www.youtube.com/watch?v=m2DolwMqErc' width='100%' height="500px" playing controls/> */}
                                     </div>
                                 <br/>
                                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse quaerat dolores odio odit quia sint facilis, possimus tenetur sit culpa recusandae quibusdam earum praesentium aliquam reprehenderit quas impedit itaque nobis saepe quam eligendi ea maxime illo. Minima quia vel repellendus dignissimos rem ut officia facilis, nobis harum aliquam cum saepe.</p>

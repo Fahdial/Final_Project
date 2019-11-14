@@ -43,20 +43,23 @@ module.exports = {
                             message: 'Wrong password'
                         })
                     }
-                    } else {
-                        let data = {
-                            status: '404',
-                            message: 'User not found'
-                    }
-                    res.send(data)
+                }else{
+                    let data = {
+                        status: '404',
+                        message: 'User not found'
                 }
-            })
-        },
+                res.send(data)
+            }
+        })
+    },
 
     userRegister: (req, res) => {
             let sql = `select * from users where username = '${req.body.username}'or email = '${req.body.email}'`
-            let sql2 = `insert into users value (0, '${req.body.username}', '${req.body.email}','${req.body.password}' , 'free', 'https://www.thispersondoesnotexist.com/image', 0)`
-        
+            let sql2 = `insert into users value (0,
+                '${req.body.username}',
+                '${req.body.email}',
+                '${req.body.password}',
+                'user',0,'free','free','free')`
             db.query(sql, (err,result)=> {
                 if(result.length > 0){
                     res.send({
@@ -108,7 +111,7 @@ module.exports = {
         },
 
     getVideoData: (req, res) => {
-        var sql = `select title, episode, link, description from lesson where subject_id = '${req.query.subject_id}'`
+        var sql = `select title, episode, link, description, material from lesson where subject_id = '${req.query.subject_id}'`
         console.log(req.query);
         // `select * from toefl_writing where id = '${req.params.id}'`
         db.query(sql, (err,result) => {
@@ -122,5 +125,77 @@ module.exports = {
         })
     },
 
+    transactionUpload: (req,res) => {
+        // console.log('msk g')
+        // console.log(req.body)
+        // console.log(req.body.data)
+        // console.log(req.body);
+        // console.log(req);
+        let path = req.file.path.replace('uploads', 'paymentproof')
+        let data = JSON.parse(req.body.data)
+        const {email, phone, plan, type, totalprice, dateupload} = data
+        var sql = `insert into payment values (0,
+        '${email}',
+        '${phone}',
+        '${plan}',
+        '${type}',
+        '${totalprice}',
+        'pending',
+        '${req.file.filename}',
+        '${dateupload}')`
+        db.query(sql, (err,result) => {
+            try {
+                if(err) throw err
+                res.send(result)
+                // console.log(result);
+            } catch (err){
+                console.log(err)
+            }
+        })
+    },
+
+    pendingAccount:(req,res)=>{
+        // console.log(req.data);
+        // let data = JSON.parse(req.body.data)
+        // console.log(data);
+        var sql = `UPDATE users SET ${req.body.plan} = 'pending' WHERE email = '${req.body.email}'`
+        console.log(sql);
+        db.query(sql,(err,result)=>{
+            try {
+                if(err) throw err
+                res.send(result)
+                console.log(result);
+            }catch (err){
+                console.log(err)
+            }
+        }) 
+    },
+
+    getPendingUser: (req,res) => {
+        var sql = `select * from payment where status = 'pending'`
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                res.send(result[0])
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+
+    getChangeState: (req,res)=>{
+        var sql =`select * from users where id = ${req.query.userid}`
+        console.log(req.query);
+        
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                res.send(result[0])
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
+    
 
 }

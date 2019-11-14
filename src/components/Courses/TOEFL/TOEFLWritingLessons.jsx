@@ -5,21 +5,31 @@ import API from '../../../services'
 import Header from "../../Header/Header"
 import '../../Courses/stylecourses.css'
 import '../../Header/stylenavbar.css'
-import TOEFLVideo from './TOEFLVideo'
+import TOEFLVideo from '../GlobalVideo'
+
+const urlApi = "http://localhost:2000/"
 
 const TOEFLWritingLessons = (props) => {
-  console.log(props.match.path.split('/')[2]);
+  // menerima data dari getvideodata
+console.log("TCL: TOEFLWritingLessons -> props", props)
+  
+  console.log(props.match.path);
+  // toefl/toefl_writing/:id
 
   const [showSidebar,setSidebar] = useState(true)
   const [data,setData] = useState({
     title: "",
     episode: "",
     link: "",
-    description: ""
+    description: "",
+    material:""
   })
+  console.log(data)
   const [loading, setLoading] = useState(true)
 
-  const dinamis = () => {
+  // render semua lesson di subject_id
+  const renderLesson = () => {
+      // state data mau diubah dengan map 
       let mapLesson = data.map((val,index)=> {
         if (val.title != 'Introduction') {
         return (
@@ -32,6 +42,19 @@ const TOEFLWritingLessons = (props) => {
       return mapLesson
   }
 
+  //tombol next dan dibuat penkodisian agar tidak lebih dari lesson yang ada
+  const nextLesson =(params)=> {
+    let nextLess = 0 
+    if(params == 'introduction'){
+      return nextLess = 1
+    }else if (params >= data.length - 1 ) {
+      return nextLess = null
+    }else{
+      nextLess = parseInt(params) + 1
+    }return nextLess
+  }
+
+  // get data awal
   const getVideoData = () => {
     API.getVideoData({subject_id: props.match.path.split('/')[2]})
         .then(res => {          
@@ -43,10 +66,8 @@ const TOEFLWritingLessons = (props) => {
     useEffect(() => {
       getVideoData()
     }, [])
-
-    console.log(data);
-    
-
+  
+    // burger
   const toggleSidebar=()=> {
     console.log('masuk gak sih u')
     setSidebar(!showSidebar)
@@ -55,7 +76,10 @@ const TOEFLWritingLessons = (props) => {
       document.getElementById("deskripsi").classList.toggle('active')
       document.getElementById("title").classList.toggle('active')
   }
+
     if (!loading) {
+      console.log(props)
+      console.log(data)
       return (
         <Fragment>
             <div id ="sidebarr">
@@ -64,11 +88,14 @@ const TOEFLWritingLessons = (props) => {
                 <span></span>
                 <span></span>
               </div>
-              <div className= "textdetil">
+              <div>
                 <ul>
-                  <li>Search</li>
+                <Link to="/toefl/toefl_writing/" ><button className='searchcolor1'> Back to Syllabus</button> </Link>
+                  {/* <li>search</li> */}
+                  <div className= "textdetil">
                   <Link to="/toefl/toefl_writing/introduction"><li>Introduction</li></Link>
-                  {dinamis()}
+                  {renderLesson()}
+                    </div>
                 </ul>
               </div>
             </div>
@@ -76,12 +103,27 @@ const TOEFLWritingLessons = (props) => {
             <div className="title-back">
               {/* <div id="deksripsi"> */}
                 <div id="title" className="title-back-font">
-                  <p className="mb-0">Introduction</p>
+
+                  {
+                    props.match.params.id !== 'introduction' && props.match.params.id < data.length ?
+                    <p className="mb-0">{data[props.match.params.id].title}</p>
+                    :
+                    <p className="mb-0">{data[0].title}</p>
+                  }
+                  
                 </div>
               </div>
             {/* </div>*/}
               <TOEFLVideo props={props} data={data} showSidebar={showSidebar}/>
-            <Link to="/toefl/toefl_writing/introduction" ><button className='nextcolor float-right mr-5'>NEXT >></button> </Link>
+              {
+                nextLesson(props.match.params.id) !== null ?
+                <div>
+                <Link to={`/toefl/toefl_writing/${nextLesson(props.match.params.id)}`} ><button className='nextcolor float-right mr-5 mb-3'>NEXT >></button> </Link>
+                <a href={API.RootPath +'/material/'+ data[props.match.params.id].material} target='_blank'><button className='nextcolor float-right mr-5 mb-3'>Download PDF</button> </a>
+                </div>
+                :
+                null
+              }
         </Fragment>
 )
     } else {

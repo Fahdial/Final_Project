@@ -21,9 +21,15 @@ import TOEFLListening from './components/Courses/TOEFL/TOEFLListening'
 import IELTS from './components/Courses/IELTS/IELTS'
 import GMAT from './components/Courses/GMAT/GMAT'
 import Membership from './components/Membership/Membership'
-import dashboard from './components/Admin Dashboard/dashboard'
-
-import AdminDashboard from './components/Admin Dashboard/dashboard'
+import Dashboard from './components/Admin Dashboard/Dashboard'
+import UsersData from './components/Admin Dashboard/UsersData'
+import Content from './components/Admin Dashboard/Content'
+import Approval from './components/Admin Dashboard/Approval'
+import Income from './components/Admin Dashboard/Income'
+import ToeflDash from './components/Admin Dashboard/ToeflDash'
+import IeltsDash from './components/Admin Dashboard/IeltsDash'
+import GmatDash from './components/Admin Dashboard/GmatDash'
+import Payment from './components/Membership/Payment'
 
 // Action Creator
 // cookies ini harus dipaling bawah semua import, diatas const app
@@ -40,7 +46,7 @@ const App = () => {
     useEffect (() => {
         let cookie = cookies.get('user')
         if (cookie){
-            dispatch(keepLogin(cookie.username, cookie.email))
+            dispatch(keepLogin(cookie.username, cookie.email, cookie.id, cookie.role, cookie.isVerified, cookie.GMAT, cookie.IELTS, cookie.TOEFL ))
         }
         setLoading(true)
     },[])
@@ -63,7 +69,15 @@ const App = () => {
                             <Route path='/ielts' component={IELTS}/>
                             <Route path='/gmat' component={GMAT}/>
                             <Route path='/membership' component={Membership}/>
-                            <Route path='/dashboard' component={dashboard} exact />
+                            <Route path='/dashboard' component={Dashboard} exact />
+                            {/* <Route path='/dashboard/content' component={Content} exact /> */}
+                            <Route path='/dashboard/toefldash' component={ToeflDash} exact />
+                            <Route path='/dashboard/ieltsdash' component={IeltsDash} exact />
+                            <Route path='/dashboard/gmatdash' component={GmatDash} exact />
+                            <Route path='/dashboard/allusers' component={UsersData} exact />
+                            <Route path='/dashboard/approval' component={Approval} exact />
+                            <Route path='/dashboard/income' component={Income} exact />
+                            <Route path='/payment' component={Payment} exact />
                     </Switch>        
                 
             )

@@ -9,7 +9,8 @@ app.use(bodyParser.json())
 app.use(cors())
 // app.use('/subscription', express.static('subscription')) 
 // app.use('/profile', express.static('profile'))
-// app.use('/thumbnail', express.static('thumbnail'))
+app.use('/paymentproof', express.static('./uploads/paymentproof'))
+app.use('/material', express.static('./uploads/material'))
 
 app.use('/auth', userRouter)
 // app.use('/admin', adminRouter)
@@ -17,5 +18,7 @@ app.use('/auth', userRouter)
 app.get('/', (req,res) => {
     res.send('<h1>Welcome to API</h1>')
 })
+
+
 
 app.listen(port, () => console.log('Listening in port : ' + port))

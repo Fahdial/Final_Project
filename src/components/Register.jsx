@@ -118,6 +118,7 @@ const Register = () => {
                                 <h4>Repeat Password</h4>
                             </div>
                             <input value= {state.repPassword} onChange ={ e => setState({...state, repPassword: e.target.value})} type='password' className='form-control'/> */}
+                        
                         </form>
                             {loadingButton()}
                             {notification()}
