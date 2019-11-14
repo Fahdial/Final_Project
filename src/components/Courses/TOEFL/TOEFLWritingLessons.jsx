@@ -119,7 +119,12 @@ console.log("TCL: TOEFLWritingLessons -> props", props)
                 nextLesson(props.match.params.id) !== null ?
                 <div>
                 <Link to={`/toefl/toefl_writing/${nextLesson(props.match.params.id)}`} ><button className='nextcolor float-right mr-5 mb-3'>NEXT >></button> </Link>
-                <a href={API.RootPath +'/material/'+ data[props.match.params.id].material} target='_blank'><button className='nextcolor float-right mr-5 mb-3'>Download PDF</button> </a>
+                {
+                  props.match.params.id == 'introduction' ?
+                  <a href={API.RootPath +'/material/'+ data[0].material} target='_blank'><button className='nextcolor float-right mr-5 mb-3'>Download PDF</button> </a>
+                  :
+                  <a href={API.RootPath +'/material/'+ data[props.match.params.id].material} target='_blank'><button className='nextcolor float-right mr-5 mb-3'>Download PDF</button> </a>
+                }
                 </div>
                 :
                 null

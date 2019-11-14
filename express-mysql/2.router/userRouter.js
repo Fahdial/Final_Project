@@ -59,7 +59,8 @@ let upload1 = multer({
 
 
 // GET
-const {userLogin, userRegister, verify, getAboutLink, getVideoData, transactionUpload, getPendingUser, pendingAccount, getChangeState} = require ('../1.controller').userController
+const {userLogin, userRegister, verify, getAboutLink, getVideoData, transactionUpload, getPendingUser, pendingAccount, getChangeState, premium, reject, getToeflData,getIeltsData,getGmatData
+,addLesson,editLesson,deleteLesson,getUsersTransaction} = require ('../1.controller').userController
 
 router.get('/userlogin', userLogin)
 router.post('/userRegister', userRegister)
@@ -68,11 +69,22 @@ router.get('/getaboutlink', getAboutLink)
 router.get('/video', getVideoData)
 router.get('/payment/pendinguser', getPendingUser)
 router.get('/payment/changestate', getChangeState)
+router.get('/dashboard/toefldata', getToeflData)
+router.get('/dashboard/ieltsdata', getIeltsData)
+router.get('/dashboard/gmatdata', getGmatData)
+router.get('/dashboard/getuserstransaction', getUsersTransaction)
 
 // POST
 router.post('/payment/paymentupload', upload.single('img'), transactionUpload)
+router.post('/dashboard/addlesson', addLesson)
 
 // PATCH
 router.patch('/payment/pendingaccount', pendingAccount)
+router.patch('/dashboard/approval/premium', premium)
+router.patch('/dashboard/approval/reject', reject)
+router.patch('/dashboard/editlesson', editLesson)
+
+//DELETE
+router.delete ('/dashboard/deletelesson', deleteLesson)
 
 module.exports = router

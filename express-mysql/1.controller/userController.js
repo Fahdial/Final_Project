@@ -1,5 +1,6 @@
 const db = require('../database')
 const nodemailer = require('nodemailer')
+const moment = require('moment')
 // const {pdfcreate} = require('../3.helpers/html-pdf')
 
 let transporter = nodemailer.createTransport({
@@ -176,7 +177,7 @@ module.exports = {
         db.query(sql, (err, result)=>{
             try {
                 if (err) throw err
-                res.send(result[0])
+                res.send(result)
             } catch (error) {
                 console.log(error)
             }
@@ -186,7 +187,6 @@ module.exports = {
     getChangeState: (req,res)=>{
         var sql =`select * from users where id = ${req.query.userid}`
         console.log(req.query);
-        
         db.query(sql, (err, result)=>{
             try {
                 if (err) throw err
@@ -195,7 +195,150 @@ module.exports = {
                 console.log(error)
             }
         })
-    }
-    
+    },
 
+    premium: (req,res) => {
+        console.log(req.body.id);
+        var sql = `select * from users where email = '${req.body.email}'`
+        var sql2 = `update payment set status = 'approve' where id = ${req.body.id}`
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+            db.query(`insert into plandate values (0, ${result[0].id}, '${req.body.plan}', '${req.body.datestart}','${req.body.dateend}')`, 
+            (err2, result2)=> {
+                if (err2) throw err2
+                db.query(sql2, (err,result)=> {
+                    if (err) throw err
+                    db.query(`update users set ${req.body.plan} = 'premium' where email = '${req.body.email}'`,
+                    (err3, result3)=> {
+                        if (err3) throw err3
+                        res.send('success')
+
+                    })
+                })
+            })
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+
+    reject: (req,res) => {
+        var sql = `update payment set status = 'reject' where id= ${req.body.id}`
+        var sql2 = `update users set ${req.body.plan} = 'free' where email= '${req.body.email}'`
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+            db.query(sql2, (err,result)=> {
+                if (err) throw err
+                res.send ('success')
+            })
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+
+    getToeflData: (req,res)=>{
+        var sql =`select * from lesson where subject_id in (select id from subject where subject_id = 1)`
+        console.log(req.query);
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                res.send(result)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+    getIeltsData: (req,res)=>{
+        var sql =`select * from lesson where subject_id in (select id from subject where subject_id = 2)`
+        console.log(req.query);
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                console.log(result)
+                res.send(result)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+    getGmatData: (req,res)=>{
+        var sql =`select * from lesson where subject_id in (select id from subject where subject_id = 3)`
+        console.log(req.query);
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                console.log(result)
+                res.send(result)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
+
+    addLesson: (req,res) => {
+    let sql = `insert into lesson values (0,
+        '${req.body.subject_id}',
+        '${req.body.title}',
+        '${req.body.episode}',
+        '${req.body.link}',
+        '${req.body.description}',0,
+        '${req.body.pdf}','${moment().format('YYYY-MM-DD HH:mm:ss')}')`
+        db.query(sql, (err,result)=> {
+            if (err) throw err
+            res.send({
+                message: 'berhasil add video baru'
+            }) 
+        })
+    },
+
+    editLesson: (req,res) => {
+            let sql = `update lesson set 
+                subject_id = '${req.body.subject_id}',
+                title= '${req.body.title}',
+                episode= '${req.body.episode}',
+                link= '${req.body.link}',
+                description='${req.body.description}',
+                material='${req.body.material}',
+                dateupload='${moment().format('YYYY-MM-DD HH:mm:ss')}'
+                where id =${req.body.id}`
+                db.query(sql, (err,result)=> {
+                    if (err) throw err
+                    res.send({
+                        message: 'edit berhasil'
+                    }) 
+                })
+            },
+
+    deleteLesson: (req,res) => {
+
+            let sql = `DELETE from lesson where id = ${req.body.id}`
+                // console.log(req.body);
+                // console.log(req.data);
+                // console.log(req.query);
+                db.query(sql, (err,result)=> {
+                    if (err) throw err
+                    res.send({
+                        message: 'berhasil delete video'
+                    }) 
+                })
+                
+            },
+
+    getUsersTransaction: (req,res) => {
+        var sql = `select u.id, username, u.email, TOEFL, IELTS, GMAT,
+        max(dateupload) LastTransaction
+        , count(p.email) jumlahTransaksi from users u join payment p on p.email = u.email group by u.id`
+
+        db.query(sql, (err, result)=>{
+            try {
+                if (err) throw err
+                res.send(result)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    },
 }

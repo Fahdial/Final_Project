@@ -108,6 +108,5 @@ export const changeState = (userid) =>{
                 }
             })
         })
-        }
-    
+    }
 }

@@ -13,10 +13,9 @@ export const GmatDash = () => {
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Title</th>
                     <th>Subject</th>
+                    <th>Title</th>
                     <th>Episode</th>
-                    <th>Desc</th>
                     <th>Link</th>
                     <th>PDF</th>
                     <th>Action</th>

@@ -1,8 +1,40 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 import Dashboard from "../Admin Dashboard/Dashboard"
 import '../Courses/stylecourses.css'
 import '../Header/stylenavbar.css'
+import API from '../../services'
+import moment from 'moment'
+
 export const UsersData = () => {
+
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    API.getUsersTransaction()
+    .then(res => {
+      console.log(res)
+      setData(res)
+    })
+  }, [])
+
+  const renderUsers = () => {
+    let render = data.map(val => {
+      return (
+        <tr key={val.id}>
+          <td>{val.id}</td>
+          <td>{val.email}</td>
+          <td>{val.TOEFL}</td>
+          <td>{val.IELTS}</td>
+          <td>{val.GMAT}</td>
+          <td>{val.jumlahTransaksi}</td>
+          <td>{moment(val.LastTransaction).format('YYYY-MM-DD HH:mm:ss')}</td>
+        </tr>
+      )
+    })
+    return render
+  }
+
+    if (!data) return <h1>Loading</h1>
     return (
         <Fragment>
         <Dashboard/>
@@ -13,23 +45,15 @@ export const UsersData = () => {
                   <tr>
                     <th>No.</th>
                     <th>Nama/Email</th>
-                    {/* free/premium pada tiap plan */}
                     <th>Toefl</th>
                     <th>Ielts</th>
                     <th>Gmat</th>
-                    <th>Expiry Date</th>
-                    {/* edit, save, delete */}
-                    <th>Action</th>
+                    <th>Total Transactions</th>
+                    <th>Last Transactions</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {/* {this.checkoutList()} */}
-                    <tr>
-                      {/* <th colSpan="4">
-                        Total
-                      </th> */}
-                    {/* {this.totalPrice()} */}
-                    </tr>
+                    {renderUsers()}
                 </tbody>
             </table>
           </div>

@@ -44,7 +44,7 @@ const Payment = (props) => {
         plan: data.plan,
         type: data.type,
         totalprice: data.totalprice,
-        dateupload: moment().format('YYYY-MM-DD kk:mm:ss')
+        dateupload: moment().format('YYYY-MM-DD HH:mm:ss')
       }
       console.log((DATA));
       
@@ -98,7 +98,7 @@ const Payment = (props) => {
                               </ul>
                               <ul className="list-unstyled mt-3 mb-4 text-right col-5">
                                 <li className="mb-3">{props.location.state}</li>
-                                <li className="mb-3">{moment(new Date()).format('DD-MM-YYYY')} - {moment(new Date()).add(2,'month').format('DD-MM-YYYY')}</li>
+                                <li className="mb-3">{moment().format('DD-MM-YYYY')} - {moment().add(2,'month').format('DD-MM-YYYY')}</li>
                                 <li>
                                   <select onChange ={e => setData({...data, type: e.target.value})} className="mb-3 align-middle">
                                   <option value='OVO'>OVO</option>
