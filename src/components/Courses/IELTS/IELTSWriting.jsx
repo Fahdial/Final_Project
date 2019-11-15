@@ -8,14 +8,14 @@ import '../../Header/stylenavbar.css'
 const urlApi = 'http://localhost:2000'
 
 
-const TOEFLListening = () => {
+const IELTSWriting = () => {
         return (
             <Fragment>
                 <Header/>
                     <div className="container">
                         <div className='row mt-5' >
                             <div className='col-8'>
-                                <h3>Listening Course Summary</h3>
+                                <h3>Writing Course Summary</h3>
                                     <div>
                                     {/* <ReactPlayer url='https://www.youtube.com/watch?v=m2DolwMqErc' width='100%' height="500px" playing controls/> */}
                                     </div>
@@ -67,7 +67,7 @@ const TOEFLListening = () => {
                                                     <li>MLorem ipsum dolor sit amet consectetur</li>
                                                     <li>MLorem ipsum dolor sit amet consectetur</li>
                                                 </ul> 
-                                                <Link to="/toefl/toefl_listening/introduction" ><button className='searchcolor1'>Start This Course >></button> </Link>
+                                                <Link to="/ielts/ielts_writing/introduction" ><button className='searchcolor1'>Start This Course >></button> </Link>
                                                 
                                         </div>
                                     </div>
@@ -87,4 +87,4 @@ const TOEFLListening = () => {
     
     }
 
-export default TOEFLListening
+export default IELTSWriting

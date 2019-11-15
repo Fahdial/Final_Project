@@ -12,17 +12,21 @@ const Dashboard = () => {
               <div id="sidebarrr">
                 <div>
                   <ul>
+                  <Link to="/" ><button className='searchcolor1'> Home</button> </Link>
                     {/* <Link to="/toefl/toefl_writing/" ><button className='searchcolor1'> Back to Syllabus</button> </Link> */}
                     {/* menampilkan id, nama/email, 3 subject (free atau premium), dan waktu membernya  */}
-                    <li>Users</li>
+                    <li>
+                    <Link to="/dashboard/allusers">Users Transaction</Link>
+                    </li>
+                    
                     {/* menampilkan id, nama/email, waktu upload, pic, pymnt method, plan, action(approve /reject) */}
-                    <li>Approval</li>
-                    {/* menampilkan id,nama/email, plan, harga member, total(pada bagian plaing bawah) */}
-                    <li>Report</li>
+                    <li>
+                    <Link to="/dashboard/approval">Approval</Link>
+                      </li>
                     {/* menampilkan id, title, subject, episode,link/filename, desc, waktu upload, action(add, edit, delete)*/}
-                    <li>TOEFL</li>
-                    <li>IELTS</li>
-                    <li>GMAT</li>
+                    <li><Link to="/dashboard/toefldash">TOEFL</Link></li>
+                    <li><Link to="/dashboard/ieltsdash">IELTS</Link></li>
+                    <li><Link to="/dashboard/gmatdash">GMAT</Link></li>
                     {/* <Link to="/toefl/toefl_writing/introduction"><li>Introduction</li></Link> */}
                   </ul>
                 </div>

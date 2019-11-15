@@ -40,7 +40,7 @@ const TOEFL = () => {
                                     <td>
                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias asperiores doloribus porro dolores facere perferendis, repellendus laudantium? Tempora odit voluptate a enim placeat dolor dolore explicabo id. Error cumque nesciunt doloremque, libero a, ea velit delectus, rem nulla facere hic.</p>
                                         <br/>
-                                        <Link className="masukkls" to="/toeflreading">Enter Reading Task ></Link>
+                                        <Link className="masukkls" to="/toefl/toefl_reading">Enter Reading Task ></Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,7 +50,7 @@ const TOEFL = () => {
                                     <td>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quasi dolores officia saepe sed facilis mollitia debitis pariatur ullam quos voluptas consequuntur, similique esse, quas placeat autem ex cupiditate ad aliquam libero sint fugiat numquam labore. Et, voluptates! Nostrum, numquam.</p>
                                         <br/>
-                                        <Link className="masukkls" to="/toeflspeaking">Enter Speaking Task ></Link>
+                                        <Link className="masukkls" to="/toefl/toefl_speaking">Enter Speaking Task ></Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -60,7 +60,7 @@ const TOEFL = () => {
                                     <td>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, tempora enim? Ullam mollitia vero vitae assumenda laudantium sint quia rem aspernatur excepturi eos ipsa, unde ea quo similique aliquid nam? Aliquam, necessitatibus culpa voluptatibus recusandae eveniet nostrum in a rerum.</p>
                                         <br/>
-                                        <Link className="masukkls" to="/toefllistening">Enter Listening  Task ></Link>
+                                        <Link className="masukkls" to="/toefl/toefl_listening">Enter Listening  Task ></Link>
                                     </td>
                                 </tr>
                             </table>

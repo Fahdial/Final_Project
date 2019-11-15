@@ -62,7 +62,7 @@ module.exports = {
                 '${req.body.username}',
                 '${req.body.email}',
                 '${req.body.password}',
-                'user',0,'free','free','free')`
+                'user',0,'free','free','free',null)`
             db.query(sql, (err,result)=> {
                 if(result.length > 0){
                     res.send({
