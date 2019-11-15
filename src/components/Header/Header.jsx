@@ -60,7 +60,9 @@ const Header = () =>{
                     </h3>
                 </div>
                 <ul className="navv-links">
-
+                        <li>            
+                            <Link to="/membership">Membership</Link>
+                        </li>
                         <li className="dropdown">
                             <span className="dropbtn">My Courses</span>
                                 <i className="fa"> &#xf107;</i>
@@ -71,7 +73,7 @@ const Header = () =>{
                             </div>
                         </li>
 
-                        <li className="dropdown">
+                        {/* <li className="dropdown">
                             <span className="dropbtn">Membership</span>
                                 <i className="fa"> &#xf107;</i>
                             <div className="dropdown-content">
@@ -79,7 +81,7 @@ const Header = () =>{
                                 <Link to="/">Payment Confirmation</Link>
                                 <Link to="/">Account Activation</Link>
                             </div>
-                        </li>
+                        </li> */}
 
                         <li className="dropdown">
                             <Link to className="dropbtn">{username}</Link>

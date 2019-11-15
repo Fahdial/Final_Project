@@ -17,7 +17,6 @@ let transporter = nodemailer.createTransport({
 module.exports = {
     userLogin: (req, res) => {
         console.log(req);
-        
             db.query (`select * from users where email = '${req.query.email}'`,
                 (err,result) => {
                 if(err) throw err
@@ -27,10 +26,13 @@ module.exports = {
                         db.query(sql, (err,result2) => {
                             console.log(result2);
                             if(result2[0].isVerified === 1) {
-                            res.send({
-                                status: '200',
-                                result: result [0]
-                            })
+                            db.query(`update users set lastlogin = '${moment().format('YYYY-MM-DD HH:mm:ss')}' where email = '${req.query.email}'`,
+                            (err,result3)=>{
+                                res.send({
+                                    status: '200',
+                                    result: result [0]
+                                })
+                            })       
                             }else{
                                 res.send({
                                     status: 'unVerified',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Route, BrowserRouter, Link, Switch, withRouter} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'universal-cookie'
+import moment from 'moment'
 import Swal from 'sweetalert2'
 
 
@@ -41,6 +42,8 @@ const App = () => {
     const [loading,setLoading]=useState(false)
 
     const dispatch = useDispatch()
+
+    const user = useSelector(state => state.auth)
    
     // use efect selalu bikin anonimus function karena menerima cb function
     useEffect (() => {
@@ -50,17 +53,118 @@ const App = () => {
         }
         setLoading(true)
     },[])
-        
+    
         // disini loading udh jadi true
-        if(loading){
-            return (
-                
+        if(loading) {
+            if (user.role === 'user') {
+                if (user.TOEFL == 'premium' && user.GMAT == 'premium' && user.IELTS == 'premium') {
+                    return (
+                            <Switch>
+                                    <Route path='/' exact component={Home}/>
+                                    <Route path='/register' component={Register}/>
+                                    <Route path='/login' component={Login}/>
+                                    <Route path='/toefl' exact component={TOEFL}/>
+                                    <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                    <Route path='/toefl/toefl_writing/:id' exact component={TOEFLWritingLessons}/>
+                                    <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                    <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                    <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                                    <Route path='/ielts' component={IELTS}/>
+                                    <Route path='/gmat' component={GMAT}/>
+                                    <Route path='/membership' component={Membership}/>
+                                    <Route path='/payment' component={Payment} exact />
+                            </Switch>
+                    )
+                } 
+                else if(user.TOEFL == 'premium' ) {
+                    return (
+                        <Switch>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/register' component={Register}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toefl_writing/:id' exact component={TOEFLWritingLessons}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                                <Route path='/membership' component={Membership}/>
+                                <Route path='/payment' component={Payment} exact />
+                        </Switch>
+                    )
+                } 
+                else if(user.TOEFL == 'pending' ) {
+                    return (
+                        <Switch>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/register' component={Register}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                                <Route path='/membership' component={Membership}/>
+                                <Route path='/payment' component={Payment} exact />
+                        </Switch>
+                    )
+                } 
+                else if(user.GMAT == 'premium' ) {
+                    return (
+                        <Switch>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/register' component={Register}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path='/gmat' component={GMAT}/>
+                                <Route path='/membership' component={Membership}/>
+                                <Route path='/payment' component={Payment} exact />
+                                <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                        </Switch>
+                    )
+                } else if(user.IELTS == 'premium' ) {
+                    return (
+                        <Switch>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/register' component={Register}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path='/ielts' component={IELTS}/>
+                                <Route path='/membership' component={Membership}/>
+                                <Route path='/payment' component={Payment} exact />
+                                <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                        </Switch>
+                    )
+                } 
+                else {
+                    return (
+                        <Switch>
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/register' component={Register}/>
+                                <Route path='/login' component={Login}/>
+                                <Route path='/membership' component={Membership}/>
+                                <Route path='/payment' component={Payment} exact />
+                                <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                        </Switch>
+                    )
+                }
+            } else if (user.role == 'admin') {
+                return (
                     <Switch>
                             <Route path='/' exact component={Home}/>
                             <Route path='/register' component={Register}/>
                             <Route path='/login' component={Login}/>
                             <Route path='/toefl' exact component={TOEFL}/>
-                            <Route path='/toefl/toeflsyllabus' exact component={TOEFLSyllabus}/>
                             <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
                             <Route path='/toefl/toefl_writing/:id' exact component={TOEFLWritingLessons}/>
                             <Route path='/toefl/toeflreading' component={TOEFLReading}/>
@@ -70,7 +174,6 @@ const App = () => {
                             <Route path='/gmat' component={GMAT}/>
                             <Route path='/membership' component={Membership}/>
                             <Route path='/dashboard' component={Dashboard} exact />
-                            {/* <Route path='/dashboard/content' component={Content} exact /> */}
                             <Route path='/dashboard/toefldash' component={ToeflDash} exact />
                             <Route path='/dashboard/ieltsdash' component={IeltsDash} exact />
                             <Route path='/dashboard/gmatdash' component={GmatDash} exact />
@@ -78,9 +181,24 @@ const App = () => {
                             <Route path='/dashboard/approval' component={Approval} exact />
                             <Route path='/dashboard/income' component={Income} exact />
                             <Route path='/payment' component={Payment} exact />
-                    </Switch>        
-                
-            )
+                    </Switch>
+                )
+            } else {
+                return (
+                    <Switch>
+                            <Route path='/' exact component={Home}/>
+                            <Route path='/register' component={Register}/>
+                            <Route path='/login' component={Login}/>
+                            <Route path='/membership' component={Membership}/>
+                            <Route path='/payment' component={Payment} exact />
+                            <Route path='/toefl' exact component={TOEFL}/>
+                                <Route path='/toefl/toefl_writing' exact component={TOEFLWriting}/>
+                                <Route path='/toefl/toeflreading' component={TOEFLReading}/>
+                                <Route path='/toefl/toeflspeaking' component={TOEFLSpeaking}/>
+                                <Route path='/toefl/toefllistening' component={TOEFLListening}/>
+                    </Switch>
+                )
+            }
         // kalo false dia jadi 
         }else {
             return(
